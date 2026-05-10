@@ -43,7 +43,7 @@ public class GraphColoring {
             System.out.println("\nSolution Exists!");
             System.out.println("Assigned Colors:");
 
-            for (int i = 0; i < V; i++) {
+            for (int i = 0; i < v; i++) {
                 System.out.println("Vertex " + i + " --> Color " + colors[i]);
             }
 
