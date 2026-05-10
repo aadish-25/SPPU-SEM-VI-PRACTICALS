@@ -30,7 +30,7 @@ public class A1 {
         }
     }
 
-    public static void main(String args[]){
+    public static void main(String args[]) {
         A1 obj = new A1();
         Scanner sc = new Scanner(System.in);
         int v, e;
@@ -40,12 +40,12 @@ public class A1 {
         e = sc.nextInt();
 
         ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
-        for(int i=0; i<v; i++){
+        for (int i = 0; i < v; i++) {
             adj.add(new ArrayList<>());
-        }        
+        }
 
         System.out.println("Enter vertex between whose there is an edge : ");
-        for(int i=0; i<e; i++){
+        for (int i = 0; i < e; i++) {
             int a = sc.nextInt();
             int b = sc.nextInt();
 
@@ -54,27 +54,32 @@ public class A1 {
         }
 
         System.out.println("Graph : ");
-        for(int i=0; i<v; i++){
-            System.out.print(i + " -> " );
-            for(int j: adj.get(i)){
+        for (int i = 0; i < v; i++) {
+            System.out.print(i + " -> ");
+            for (int j : adj.get(i)) {
                 System.out.print(j + " ");
             }
             System.out.println();
         }
 
         // DFS
-        System.out.println("Depth First Search : ");
+        System.out.println("\nDepth First Search : ");
         boolean visitedDFS[] = new boolean[v];
-        for(int i=0; i<v; i++){
-            if(!visitedDFS[i]) obj.dfs(i, adj, visitedDFS);
+        for (int i = 0; i < v; i++) {
+            if (!visitedDFS[i]) {
+                obj.dfs(i, adj, visitedDFS);
+                System.out.println();
+            }
         }
 
         // BFS
-        System.out.println("\n\nBreadth First Search : ");
+        System.out.println("\nBreadth First Search : ");
         boolean visitedBFS[] = new boolean[v];
-        for(int i=0; i<v; i++){
-            if(!visitedBFS[i]) obj.bfs(i, adj, visitedBFS);
+        for (int i = 0; i < v; i++) {
+            if (!visitedBFS[i]) {
+                obj.bfs(i, adj, visitedBFS);
+                System.out.println();
+            }
         }
-
     }
 }
