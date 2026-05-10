@@ -46,7 +46,7 @@ public class A1 {
 
         System.out.println("Enter vertex between whose there is an edge : ");
         for(int i=0; i<e; i++){
-            int a = sc.nextInt();boolean[] visited
+            int a = sc.nextInt();
             int b = sc.nextInt();
 
             adj.get(a).add(b);
