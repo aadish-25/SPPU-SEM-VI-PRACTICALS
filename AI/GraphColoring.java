@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class graph_coloring {
+public class GraphColoring {
 
     static boolean isSafe(int vertex, int color, int[] colors, int[][] graph, int V) {
         for (int i = 0; i < V; i++) {
@@ -49,7 +49,7 @@ public class graph_coloring {
 
         int[][] graph = new int[V][V];
         int[] colors = new int[V]; // stores color assigned to each edge
-        Arrays.fill(colors, 0);// Initialize with no color assigned
+        Arrays.fill(colors, 0); // Initialize with no color assigned
 
         System.out.print("Enter number of edges: ");
         int edges = sc.nextInt();
