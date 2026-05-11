@@ -1,19 +1,9 @@
 import java.util.*;
 
-public class GraphColoring {
+public class graph_coloring {
 
-    int v;
-    int[][] graph;
-    int[] colors;
-
-    GraphColoring(int v) {
-        this.v = v;
-        graph = new int[v][v];
-        colors = new int[v];
-    }
-
-    boolean isSafe(int vertex, int color) {
-        for (int i = 0; i < v; i++) {
+    static boolean isSafe(int vertex, int color, int[] colors, int[][] graph, int V) {
+        for (int i = 0; i < V; i++) {
             if (graph[vertex][i] == 1 && colors[i] == color) {
                 return false;
             }
@@ -21,32 +11,31 @@ public class GraphColoring {
         return true;
     }
 
-    boolean solveColoring(int vertex, int m) {
-        if (vertex == v) {
+    static boolean solveColoring(int vertex, int m, int[] colors, int[][] graph, int V) {
+        if (vertex == V) {
             return true;
         }
 
-        for (int color = 1; color <= m; color++) {
-            if (isSafe(vertex, color)) {
+        for (int color = 0; color < m; color++) {
+            if (isSafe(vertex, color, colors, graph, V)) {
                 colors[vertex] = color;
-                if (solveColoring(vertex + 1, m)) {
+                if (solveColoring(vertex + 1, m, colors, graph, V)) {
                     return true;
                 }
-                colors[vertex] = 0;
+                colors[vertex] = 0; // backtrack
             }
         }
         return false;
     }
 
-    void graphColoring(int m) {
-        if (solveColoring(0, m)) {
+    static void graphColoring(int m, int[] colors, int[][] graph, int V, String[] colorNames) {
+        if (solveColoring(0, m, colors, graph, V)) {
             System.out.println("\nSolution Exists!");
             System.out.println("Assigned Colors:");
-
-            for (int i = 0; i < v; i++) {
-                System.out.println("Vertex " + i + " --> Color " + colors[i]);
+            for (int i = 0; i < V; i++) {
+                int colorIndex = colors[i];
+                System.out.println("Vertex " + i + " --> Color " + colorNames[colorIndex]);
             }
-
         } else {
             System.out.println("Solution does not exist.");
         }
@@ -56,26 +45,35 @@ public class GraphColoring {
         Scanner sc = new Scanner(System.in);
 
         System.out.print("Enter number of vertices: ");
-        int v = sc.nextInt();
+        int V = sc.nextInt();
 
-        GraphColoring gc = new GraphColoring(v);
+        int[][] graph = new int[V][V];
+        int[] colors = new int[V]; // stores color assigned to each edge
+        Arrays.fill(colors, 0);// Initialize with no color assigned
 
         System.out.print("Enter number of edges: ");
         int edges = sc.nextInt();
 
-        System.out.println("Enter connected vertices:");
+        System.out.println("Enter vertices between whom there is an edge (edges start from 0):");
         for (int i = 0; i < edges; i++) {
             int a = sc.nextInt();
             int b = sc.nextInt();
-
-            gc.graph[a][b] = 1;
-            gc.graph[b][a] = 1;
+            graph[a][b] = 1;
+            graph[b][a] = 1;
         }
 
         System.out.print("Enter number of colors: ");
         int m = sc.nextInt();
+        sc.nextLine();
 
-        gc.graphColoring(m);
+        String[] colorNames = new String[m];
+        System.out.println("Enter " + m + " color names: ");
+        for (int i = 0; i < m; i++) {
+            colorNames[i] = sc.nextLine();
+        }
+
+        graphColoring(m, colors, graph, V, colorNames);
+
         sc.close();
     }
 }
