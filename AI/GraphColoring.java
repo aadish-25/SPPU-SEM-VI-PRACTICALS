@@ -22,7 +22,7 @@ public class GraphColoring {
                 if (solveColoring(vertex + 1, m, colors, graph, V)) {
                     return true;
                 }
-                colors[vertex] = 0; // backtrack
+                colors[vertex] = -1; // backtrack
             }
         }
         return false;
@@ -49,7 +49,7 @@ public class GraphColoring {
 
         int[][] graph = new int[V][V];
         int[] colors = new int[V]; // stores color assigned to each edge
-        Arrays.fill(colors, 0); // Initialize with no color assigned
+        Arrays.fill(colors, -1); // Initialize with no color assigned
 
         System.out.print("Enter number of edges: ");
         int edges = sc.nextInt();
